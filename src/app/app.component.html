@@ -1,4 +1,63 @@
-<h1>
-  {{title}}
-</h1>
+<!-- Menu orizzontale: INIZIO -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <hr class="nav-header-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a routerLink="/" class="navbar-brand" style="padding-top: 16px;">
+        <img ng-click="manageCollapsed('voceMenuSx')" alt="Home" src="../assets/img/logo_mediadata.png" (click)="isCollapsed=true">
+      </a>
+    </div>
+    <div class="language-choice" >
+		  <a [ngClass]="{active: lang=='it'}" (click)="changeLang('it')">IT</a> |
+      <a [ngClass]="{active: lang=='en'}" (click)="changeLang('en')">EN</a> |
+      <a [ngClass]="{active: lang=='es'}" (click)="changeLang('es')">ES</a> |
+      <a [ngClass]="{active: lang=='fr'}" (click)="changeLang('fr')">FR</a>
+    </div>
+    <div id="mnuMobile" class="collapse navbar-collapse" [ngClass]="{in:!isCollapsed}">
+      <ul class="nav navbar-nav">
+          <li class="pipe-border-right">
+            <a target="_blank" href="http://{{config.getConfig('mddrHostName')}}/{{lang}}/">
+              <span class="pre-link-nav">MEDI</span>
+              ADDRESS
+            </a>
+            <ng-container i18n="voce del menu">banca dati giornalisti</ng-container>
+          </li>
+          <li class="pipe-border-right" [ngClass]="{ true: 'active' }[rightPath('mediaconference')]">
+            <a ng-click="manageCollapsed('voceMenuSx')" ui-sref="mediaconference.elenco({params:'{}', page:1})">
+              <span class="pre-link-nav">MEDIA</span>
+              CONFERENCE
+            </a>
+            <ng-container i18n="voce del menu">conferenze stampa</ng-container>
+          </li>
+          <li class="pipe-border-right" [ngClass]="{ true: 'active' }[rightPath('windpress')]">
+            <a ng-click="manageCollapsed('voceMenuSx')" routerLink='/seconda-pagina/{"q":"", "com":"", "arg_id":[]}'>
+              <span class="pre-link-nav">WIND</span>PRESS
+            </a>
+            comunicati stampa
+          </li>
+          <li class="pipe-border-right" [ngClass]="{ true: 'active' }[rightPath('aziende')]">
+            <a ng-click="manageCollapsed('voceMenuSx')" ui-sref="aziende.elenco({area_id:'{}', page:1})"><span class="pre-link-nav">PR</span>ADDRESS</a>
+            banca dati comunicatori
+          </li>
+          <li class="nav-link-singoli" [ngClass]="{ active: activePath=='/who-we-are' }">
+            <a ng-click="manageCollapsed('voceMenuSx')" ui-sref="whoweare">CHI SIAMO</a>
+          </li>
+          <!--
+          <li class="nav-link-singoli" ng-show="currentUser">
+            <a ng-click="manageCollapsed('voceMenuSx')" id="user-flag" ui-sref="profilo.profilo">
+              currentUser.nome <span class="badge" ng-show="currentUser.giornalista && currentUser.alert">1</span>
+            </a>
+          </li>
+          -->
+        <li class="nav-link-singoli" ng-if="!currentUser">
+          <a id="user-flag" routerLink='/login'>
+            LOGIN
+          </a>
+        </li>
+      </ul>
+ 		</div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+<!-- Menu orizzontale: FINE -->
 <router-outlet></router-outlet>

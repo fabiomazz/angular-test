@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="aa6022213554341f6628fa6254d56e5127493621" datatype="html">
+        <source>banca dati giornalisti</source>
+        <target>base de datos</target>
+        <note priority="1" from="description">voce del menu</note>
+      </trans-unit>
+      <trans-unit id="77843ac2a0eb0662e26f433ff2364c845ef28206" datatype="html">
+        <source>conferenze stampa</source>
+        <target/>
+        <note priority="1" from="description">voce del menu</note>
+      </trans-unit>
+      <trans-unit id="f65253954b66e929a8b4d5ecaf61f9129f8cec64" datatype="html">
+        <source>Dashboard</source>
+        <target/>
+        <note priority="1" from="description">descrizione per rendere più facile la traduzione</note>
+      </trans-unit>
+      <trans-unit id="33a29e29d6c1ae044e8e3350733a49c8dbeb18af" datatype="html">
+        <source>Heroes</source>
+        <target/>
+        <note priority="1" from="description">descrizione per rendere più facile la traduzione</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

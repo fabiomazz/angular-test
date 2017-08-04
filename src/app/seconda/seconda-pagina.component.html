@@ -1,0 +1,71 @@
+<div id="mddr-comunicati" class="container container-collapsed-sliding">
+	<div class="left-col-content" [ngClass]="{'left-menu-collapsed': !leftMenuIsCollapsed}">
+		<div class="paginator-top"></div>
+		<div class="br-line-top-grey"></div>
+		<h6 class="title-grey-light">
+			FILTRI
+		</h6>
+		<div class="angle-right" [ngClass]="{'left-menu-collapsed': leftMenuIsCollapsed}" ng-click="manageCollapsed('leftMenuIsCollapsed')">
+			<span ng-show="leftMenuIsCollapsed">Apri<i class="fa fa-angle-right"></i></span>
+			<span ng-show="!leftMenuIsCollapsed"><i class="fa fa-angle-left"></i> Chiudi</span>
+		</div>
+		<div class="clear">
+			<div class="content-form-search">
+				<label>
+					Parola chiave
+				</label>
+				<input class="form-control" name="keyword" [(ngModel)]="model.q" (change)="navigateToComunicati()"/>
+				<br>
+				<label>
+					Committente
+				</label>
+				<input class="form-control" name="committente" [(ngModel)]="model.com" (change)="navigateToComunicati()"/>
+			</div>
+			<div class="clear"></div>
+			<div class="pull-right sm-filtra">
+				<a>
+					<input ng-click="manageCollapsed('leftMenuIsCollapsed')" class="btn btn-primary" type="button" value="FILTRA" />
+				</a>
+			</div>
+			<div class="clear"></div>
+			<div class="br-thin-line-top-grey"></div>
+			<div class="menu-checkbox-argomenti">
+				<ul  style="padding-left:0px">
+					<li *ngFor="let argomento of argomenti"  (click)="argomento.open = !argomento.open; $event.stopPropagation()" style="cursor:pointer; list-style:none" >
+						<i class="fa fa-minus-square-o" aria-hidden="true" [hidden]="argomento.selection != 'par'"></i>
+						<i class="fa fa-check-square-o" aria-hidden="true" [hidden]="argomento.selection != 'all'"></i>
+						<i class="fa fa-square-o" aria-hidden="true" [hidden]="argomento.selection"></i>
+            {{argomento.argomento}}
+            
+						<ul  style="padding-left:10px">
+							<li *ngFor="let f of argomento._embedded.argomento" [hidden]="!argomento.open" style="list-style:none" (click)="$event.stopPropagation()">
+								<label style="font-weight: normal; margin-bottom:0;">
+									<input type="checkbox" [checked]="f.checked" (click)="f.checked = !f.checked; navigateToComunicati();$event.stopPropagation()"/> {{f.argomento}}
+								</label>
+								
+							</li>
+						</ul>
+						<!--
+          -->
+					</li>
+				</ul>
+			</div>
+			<!--
+			<div class="menu-checkbox-argomenti">
+				<div class="checkbox" ng-repeat="argomento in argomenti.data._embedded.argomento">
+					<label>
+			  			<input type="checkbox" checklist-model="comunicato.argomenti" checklist-value="argomento.id" checklist-change="checkArgomento()"> {{argomento.argomento}}
+						<br>
+					</label>
+				</div>
+			</div>
+			 -->
+		</div>
+	</div>
+	<div ui-view class="main-content" [ngClass]="{'left-menu-collapsed': leftMenuIsCollapsed}" autoscroll >
+    
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+

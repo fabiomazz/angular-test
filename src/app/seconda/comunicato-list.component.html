@@ -1,0 +1,95 @@
+{{title}}
+<!--
+<ul>
+    <li *ngFor="let comunicato of comunicati" (click)="onSelect(comunicato)">
+
+        {{comunicato.committente}}:{{comunicato.titolo}}
+    
+    </li>
+</ul>
+-->
+<div class="row">
+	<div class="col-md-12">
+		<div class="paginator-top"><a routerLink="/">Homepage</a> > <span class="paginator-top-selected">windpress</span></div>
+		<div class="br-line-top-red"></div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="pull-right">
+			<a ui-sref="comunicato_nuovo">
+				<input class="btn btn-primary" type="button" i18n-value value="NUOVO COMUNICATO" />
+			</a>
+		</div>
+		<h3 class="title-slab-red" i18n>
+			Windpress
+		</h3>
+		<span class="caption-title-main-content" i18n>
+			Comunicati stampa: {{comunicati.total_items}}
+		</span>
+		<br>
+    <ng-container i18n="windpress des">nell'ultimo mese</ng-container>: {{number?.comunicati_mese | number}}<br>
+		<ng-container i18n="windpress des">nell'ultima settimana</ng-container>: {{number?.comunicati_settimana | number}}
+	</div>
+</div>
+<div class="box-main-content">
+	<div class="paginator-main-content">
+    <!--
+		<paginator elenco="comunicati" class="paginator-main-content" template-url="/<?php echo $this->lang ?>/home/paginator"></paginator>
+    -->
+  </div>
+	<h4 class="title-grey-light" i18n>Lista comunicati</h4>
+	<div class="br-line-top-grey"></div>
+	<ul>
+		<li *ngFor="let comunicato of comunicati" (click)="onSelect(comunicato)">
+			<div class="elenco-box-main-content">
+				<div class="row">
+					<div class="col-md-9">
+						<h5>
+							{{comunicato.titolo}}
+						</h5>
+					</div>
+					<div class="col-md-3">
+						<div class="data-box-main-content">
+							{{comunicato.pubblico_dal}}
+						</div>
+					</div>
+				</div>
+				<div class="box-dettagli-fonte">
+					<span i18n>Fonte</span>: <strong>{{comunicato.committente}}</strong>
+				</div>
+				<div class="row">
+					<div class="box-div-dettagli col-md-9">
+						<a i18n class="box-link-dettagli">
+							VAI AI DETTAGLI
+						</a>
+					</div>
+					<div class="col-md-3">
+						<div ng-show="comunicato.stat">
+							<div class="data-box-main-content" i18n>
+								visualizzazioni: {{comunicato?.stat?.consultati}}
+							</div>
+							<br>
+							<div i18n class="data-box-main-content">
+								'inoltri': {{comunicato?.stat?.inoltrati}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- end of elenco-box-main-content -->
+			<div class="br-thin-line-top-grey"></div>
+		</li>
+		<li class="box-no-info" ng-if="!comunicati._embedded.comunicato.length" i18n>
+			Non ci sono comunicati con i criteri impostati.
+		</li>
+	</ul>
+	<div class="paginator-main-content">
+    <!--
+		<paginator elenco="comunicati" class="paginator-main-content" template-url="/<?php echo $this->lang ?>/home/paginator"></paginator>
+    -->
+  </div>
+</div>
+<script type="text/javascript">
+	$("footer").show();
+</script>
+

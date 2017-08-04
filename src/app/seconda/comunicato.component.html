@@ -1,0 +1,117 @@
+<div id="mddr-scheda-comunicato" class="container container-collapsed-2col">
+	<div class="left-col-content">
+		<div class="paginator-top"></div>
+		<div class="br-line-top-grey"></div>
+	</div>
+	<div class="main-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="paginator-top">
+					<a ui-sref="index">Homepage</a> > <a routerLink='/seconda-pagina/{"q":"", "com":"", "arg_id":[]}'>windpress</a> > <span class="paginator-top-selected">scheda comunicato</span>
+					<span style="cursor:pointer" class="pull-right" (click)="backToList()">
+						torna all'elenco
+					</span>
+				</div>
+				<div class="br-line-top-red"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="data-box-main-content">
+					{{comunicato.pubblico_dal}}
+				</div>
+				<h3 class="title-slab-red">
+					{{comunicato.titolo}}
+				</h3>
+				<span class="caption-title-main-content">
+					Comunicato stampa
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7"></div>
+			<div class="col-md-5">
+				<ul ng-show="currentUser.id == ownerId" class="menu-comunicato-stampa pull-right">
+					<li>
+						<a ui-sref="comunicato_modifica({id:comunicato.id})">
+							MODIFICA
+						</a>
+					</li>
+					<li>
+						<a (click)="deleteComunicato()" >
+							ELIMINA COMUNICATO
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row box-main-content clear">
+				<div class="col-md-12">
+					<h4 class="title-grey-light">Testo del comunicato</h4>
+					<div class="br-line-top-grey"></div>
+					<div class="elenco-box-main-content">
+						<!-- qui dentro viene riportato il testo del comunicato -->
+						<div [innerHTML]="comunicato.abstract"></div>
+						<div class="box-div-dettagli">
+							<div class="title-raleway-red" ng-if="comunicato.cartella_stampa.length > 0">
+								DOCUMENTI'
+							</div>
+							<div class="title-raleway-red" ng-if="comunicato.cartella_stampa.length == 0">
+								NON CI SONO ALLEGATI
+							</div>
+							<div *ngFor="let file of comunicato?._embedded?.cartelle_stampa">
+								<ul>
+									<li>
+										<a class="doc-underline" href="/api/cartella_stampa/{{file.id}}?file=1">{{file.file}}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-if="comunicato._embedded.argomenti.length > 0">
+					<div class="col-md-12">
+						<h4 class="title-grey-light">Argomenti</h4>
+						<div class="br-line-top-grey"></div>
+						<div class="elenco-box-main-content">
+							<ul>
+								<li *ngFor="let arg of comunicato._embedded?.argomenti">
+									{{arg.argomento}}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h4 class="title-grey-light">Emittente</h4>
+						<div class="br-line-top-grey"></div>
+						<div class="elenco-box-main-content">
+							<div [hidden]="!comunicato?._embedded?.committente?.committente">
+								{{comunicato?._embedded?.committente?.committente}}
+							</div>
+							<div ng-if="comunicato.referente != ''" class="box-div-dettagli">
+								<div class="title-raleway-red">
+									RECAPITI EMITTENTE
+								</div>
+								<div ng-bind-html="comunicato.referente"></div>
+							</div>
+							<!--
+							ATTUALMENTE NON ABBIAMO I RECAPITI DEI COMMITTENTI  
+							<div class="box-div-dettagli">
+								<div class="title-raleway-red">
+									<?php echo $this->translate('RECAPITI EMITTENTE') ?>
+								</div>
+								<ul>
+									<li>lorem ipsum</li>
+									<li>lorem ipsum</li>
+									<li>lorem ipsum</li>
+								</ul>
+							</div>
+							-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
